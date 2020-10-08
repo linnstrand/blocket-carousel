@@ -8,7 +8,7 @@ const mockImage: CarouselImage = {
 
 async function getMockData<T>(): Promise<T> {
   let images: CarouselImage[] = [];
-  for (let index = 0; index < 6; index++) {
+  for (let index = 0; index < 8; index++) {
     // use object spread for shallow copy, and updating ID
     images.push({ ...mockImage, id: index });
   }
