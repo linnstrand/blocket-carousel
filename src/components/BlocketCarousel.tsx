@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { CarouselImage } from "../CarouselImage";
+import CarouselArrow from "./CarouselArrow";
+import CarouselPager from "./CarouselPager";
+import ImageView from "./ImageView";
 
 interface Props {
   images: CarouselImage[];
@@ -28,50 +31,31 @@ const BlocketCarousel = ({ images }: Props) => {
   return (
     <div className="carousel-container">
       <div className="carousel">
-        {shown.map((image, index) => (
-          <div
-            className={`carousel-item${
-              active?.id === image.id ? " active" : ""
-            }`}
-            key={image.id}
-            onClick={() => moveRangeToActive(image, index)}
-          >
-            <div className="carousel-image">
-              <img src={image.url} alt={image.name} />
-            </div>
-            <div>{image.name + image.id}</div>
-          </div>
+        {shown.map((image) => (
+          <ImageView
+            clickImage={() => setActive(image)}
+            activeId={!!active ? active.id : -1}
+            image={image}
+          />
         ))}
       </div>
-      <ol className="carousel-indicator">
-        {images.map((image, index) => (
-          <li
-            className={active?.id === image.id ? "active" : ""}
-            key={image.id}
-            onClick={() => moveRangeToActive(image, index)}
-          >
-            <i className="material-icons">radio_button_checked</i>
-          </li>
-        ))}
-      </ol>
-      <div
-        className="carousel-prev"
-        role="button"
-        onClick={() => slide(startIndex - 3)}
-      >
-        <span className="prev-icon">
-          <i className="material-icons">navigate_before</i>
-        </span>
-      </div>
-      <div
-        className="carousel-next"
-        role="button"
-        onClick={() => slide(startIndex + 3)}
-      >
-        <span className="next-icon">
-          <i className="material-icons">navigate_next</i>
-        </span>
-      </div>
+      <CarouselPager
+        images={images}
+        activeId={!!active ? active.id : -1}
+        activate={(image, index) => moveRangeToActive(image, index)}
+      />
+      <CarouselArrow
+        className={`carousel-prev${startIndex === 0 ? " hidden" : ""}`}
+        slide={() => slide(startIndex - 3)}
+        iconName="navigate_before"
+      />
+      <CarouselArrow
+        className={`carousel-next${
+          startIndex === images.length - 3 ? " hidden" : ""
+        }`}
+        slide={() => slide(startIndex + 3)}
+        iconName="navigate_next"
+      />
     </div>
   );
 };

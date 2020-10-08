@@ -35,6 +35,8 @@ code {
   display: flex;
   padding: 1rem;
   grid-area: images;
+  height: calc(295px * 1.1);
+  align-items: center;
 }
 
 .carousel-item {
@@ -63,20 +65,21 @@ code {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgba(128, 128, 128, 0.2);
-  color: #fff;
+  color: gray;
   padding: 0.5rem;
   cursor: pointer;
-}
-
-.prev-icon,
-.next-icon {
-  .material-icons {
-    font-size: 36px;
+  &.hidden {
+    opacity: 0;
   }
 }
 
-.carousel-prev {
+.paging-icon {
+  .material-icons {
+    font-size: 48px;
+  }
+}
+
+.carousel-before {
   grid-area: before;
 }
 
