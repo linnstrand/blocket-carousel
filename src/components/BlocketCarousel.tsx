@@ -9,7 +9,7 @@ const BlocketCarousel = ({ images }: Props) => {
     <div className="carousel">
       {images?.length > 0 &&
         images.map((image) => (
-          <div className="carousel-item" key="image.id">
+          <div className="carousel-item" key={image.id}>
             <img src={image.url} alt={image.name} />
           </div>
         ))}
