@@ -33,6 +33,7 @@ const BlocketCarousel = ({ images }: Props) => {
       <div className="carousel">
         {shown.map((image) => (
           <ImageView
+            key={image.id}
             clickImage={() => setActive(image)}
             activeId={!!active ? active.id : -1}
             image={image}
