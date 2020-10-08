@@ -12,27 +12,97 @@ code {
     monospace;
 }
 
-.carousel {
+.carousel-content {
+  margin: 1rem;
+}
+
+.carousel-container {
   position: relative;
-  background-color: aqua;
+  margin: 1em;
+  display: grid;
+  grid-template-columns: 1fr minmax(1fr, 20rem) 1fr;
+  grid-template-rows: auto;
+  grid-gap: 0.5rem;
+  grid-template-areas:
+    "before images next"
+    "indicator indicator indicator";
+}
+
+.carousel {
+  overflow: hidden;
+  text-align: center;
+  justify-content: space-evenly;
+  display: flex;
+  padding: 1rem;
+  grid-area: images;
 }
 
 .carousel-item {
-  position: relative;
-  width: 100%;
+  margin: 0.5rem;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
   overflow: hidden;
-  background-color: blue;
+  height: 295px;
+  width: 180px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 .carousel-prev,
 .carousel-next {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 15%;
   text-align: center;
+  background-color: rgba(128, 128, 128, 0.2);
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.prev-icon,
+.next-icon {
+  .material-icons {
+    font-size: 36px;
+  }
+}
+
+.carousel-prev {
+  grid-area: before;
+}
+
+.carousel-next {
+  grid-area: next;
+}
+
+.carousel-indicator {
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 15%;
+  margin-left: 15%;
+  list-style: none;
+  grid-area: indicator;
+
+  li {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-sizing: content-box;
+    flex: 0 1 auto;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-left: 3px;
+    opacity: 0.5;
+    .active {
+      background-color: white;
+    }
+  }
+
+  .active {
+    opacity: 1;
+  }
 }
